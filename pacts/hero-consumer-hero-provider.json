@@ -1,0 +1,101 @@
+{
+  "consumer": {
+    "name": "hero-consumer"
+  },
+  "provider": {
+    "name": "hero-provider"
+  },
+  "interactions": [
+    {
+      "description": "a GET request for a player",
+      "providerState": "a player exists",
+      "request": {
+        "method": "GET",
+        "path": "/players/30",
+        "headers": {
+          "Accept": "application/json; charset=utf-8"
+        },
+        "matchingRules": {
+          "$.headers.Accept": {
+            "match": "regex",
+            "regex": "application\\/json; *charset=utf-8"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "name": "Sachin Tendulkar",
+          "role": "Batsman",
+          "country": "IN",
+          "id": 30
+        },
+        "matchingRules": {
+          "$.headers.Content-Type": {
+            "match": "regex",
+            "regex": "application\\/json; *charset=utf-8"
+          },
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    },
+    {
+      "description": "a POST request to create a player",
+      "providerState": "provider allows player creation",
+      "request": {
+        "method": "POST",
+        "path": "/players",
+        "headers": {
+          "Accept": "application/json; charset=utf-8",
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "name": "Sachin Tendulkar",
+          "role": "Batsman",
+          "country": "IN"
+        },
+        "matchingRules": {
+          "$.headers.Accept": {
+            "match": "regex",
+            "regex": "application\\/json; *charset=utf-8"
+          },
+          "$.headers.Content-Type": {
+            "match": "regex",
+            "regex": "application\\/json; *charset=utf-8"
+          }
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "body": {
+          "name": "Sachin Tendulkar",
+          "role": "Batsman",
+          "country": "IN",
+          "id": 30
+        },
+        "matchingRules": {
+          "$.headers.Content-Type": {
+            "match": "regex",
+            "regex": "application\\/json; *charset=utf-8"
+          },
+          "$.body": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
